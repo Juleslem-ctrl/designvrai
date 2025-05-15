@@ -95,6 +95,26 @@
       <input type="submit" value="Envoyer">
     </form>
   </div>
+<script>
+  document.querySelector("form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const response = await fetch('/api/formulaire', {
+      method: 'POST',
+      body: formData // Pas de JSON ici, car on envoie un fichier (multipart/form-data)
+    });
+
+    if (response.ok) {
+      alert("Formulaire envoyé avec succès !");
+      form.reset();
+    } else {
+      alert("Erreur lors de l'envoi.");
+    }
+  });
+</script>
 
 </body>
 </html>
